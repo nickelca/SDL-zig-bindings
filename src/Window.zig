@@ -12,7 +12,7 @@ const Coordinate = enum(i32) {
     }
 };
 
-pub fn Create(title: [:0]const u8, x: Coordinate, y: Coordinate, w: i32, h: i32, flags: CreateFlags) !Window {
+pub fn Create(title: [:0]const u8, x: Coordinate, y: Coordinate, w: i32, h: i32, flags: Create_Flags) !Window {
     const handle = SDL.C.SDL_CreateWindow(
         title.ptr,
         @intFromEnum(x),
@@ -33,7 +33,7 @@ pub fn Destroy(self: Window) void {
     SDL.C.SDL_DestroyWindow(self.handle);
 }
 
-pub const CreateFlags = packed struct(u32) {
+pub const Create_Flags = packed struct(u32) {
     fullscreen: bool = false, // fullscreen window
     opengl: bool = false, // window usable with OpenGL context
     shown: bool = false, // window is visible

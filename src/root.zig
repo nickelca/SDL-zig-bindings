@@ -1,4 +1,4 @@
-pub fn Init(flags: InitFlags) !void {
+pub fn Init(flags: Init_Flags) !void {
     if (C.SDL_Init(@bitCast(flags)) < 0) {
         Log_Error("Init");
         return error.SDL_Init;
@@ -36,7 +36,7 @@ pub fn Poll_Event() ?Event {
     return Event.From_C(e);
 }
 
-pub const InitFlags = packed struct(u32) {
+pub const Init_Flags = packed struct(u32) {
     timer: bool = false,
     __pad1: u2 = 0,
     audio: bool = false,
@@ -97,14 +97,14 @@ pub const major_version = C.SDL_MAJOR_VERSION;
 pub const minor_version = C.SDL_MINOR_VERSION;
 pub const patch_level = C.SDL_PATCHLEVEL;
 
-pub const Window = @import("SDL/Window.zig");
-pub const Renderer = @import("SDL/Renderer.zig");
-pub const Rect = @import("SDL/Rect.zig").Rect;
-pub const Color = @import("SDL/Color.zig");
-pub const Event = @import("SDL/Event.zig").Event;
-pub const Surface = @import("SDL/Surface.zig");
-pub const Texture = @import("SDL/Texture.zig");
-pub const Hint = @import("SDL/Hint.zig").Hint;
+pub const Window = @import("Window.zig");
+pub const Renderer = @import("Renderer.zig");
+pub const Rect = @import("Rect.zig").Rect;
+pub const Color = @import("Color.zig");
+pub const Event = @import("Event.zig").Event;
+pub const Surface = @import("Surface.zig");
+pub const Texture = @import("Texture.zig");
+pub const Hint = @import("Hint.zig").Hint;
 
 pub const C = @import("C");
 const std = @import("std");
