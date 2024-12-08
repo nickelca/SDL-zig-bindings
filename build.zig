@@ -3,15 +3,7 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
 
     const libsdl_dep = b.dependency("libsdl", .{});
-    const libsdl_include_path = libsdl_dep.path("zig-out/include/SDL2");
-    const libsdl_lib_path = libsdl_dep.path("zig-out/lib");
-
-    const c = b.addTranslateC(.{
-        .root_source_file = b.path("src/includes.h"),
-        .target = target,
-        .optimize = optimize,
-    });
-    c.addIncludePath(libsdl_include_path);
+    const libsdl = libsdl_dep.artifact("SDL2");
 
     const sdl = b.addModule("SDL", .{
         .root_source_file = b.path("src/root.zig"),
@@ -19,8 +11,14 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-    sdl.addLibraryPath(libsdl_lib_path);
+    sdl.linkLibrary(libsdl);
     sdl.linkSystemLibrary("SDL2", .{});
+
+    const c = b.addTranslateC(.{
+        .root_source_file = b.path("src/includes.h"),
+        .target = target,
+        .optimize = optimize,
+    });
     sdl.addImport("C", c.createModule());
 
     const example = b.addExecutable(.{

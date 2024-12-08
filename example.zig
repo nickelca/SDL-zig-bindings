@@ -23,6 +23,15 @@ pub fn main() !void {
     defer renderer.Destroy();
     try renderer.Set_Blend_Mode(.blend);
 
+    var rect: SDL.Rect(.i32) = .{
+        .width = @min(window_width, window_height) / 2,
+        .height = @min(window_width, window_height) / 2,
+        .x = window_width / 2,
+        .y = window_height / 2,
+    };
+    rect.x -= @divFloor(rect.width, 2);
+    rect.y -= @divFloor(rect.height, 2);
+
     var quit: bool = false;
     while (!quit) {
         while (SDL.Poll_Event()) |e| switch (e) {
@@ -32,6 +41,8 @@ pub fn main() !void {
 
         try renderer.Set_Draw_Color(.white);
         try renderer.Clear();
+        try renderer.Set_Draw_Color(.red);
+        try renderer.Fill_Rect(rect);
 
         renderer.Present();
     }
