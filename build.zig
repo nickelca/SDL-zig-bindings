@@ -21,6 +21,7 @@ pub fn build(b: *std.Build) void {
     });
     sdl.addLibraryPath(libsdl_lib_path);
     sdl.linkSystemLibrary("SDL2", .{});
+    sdl.addImport("C", c.createModule());
 }
 
 const std = @import("std");
