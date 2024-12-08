@@ -52,4 +52,4 @@ pub fn From_C(e: SDL.C.SDL_Event) Mouse_Motion {
     };
 }
 
-const SDL = @import("root.zig");
+const SDL = @import("../root.zig");

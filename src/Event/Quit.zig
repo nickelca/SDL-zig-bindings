@@ -25,4 +25,4 @@ pub fn From_C(e: SDL.C.SDL_Event) Quit {
     };
 }
 
-const SDL = @import("root.zig");
+const SDL = @import("../root.zig");
