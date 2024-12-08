@@ -32,4 +32,4 @@ pub fn To_C(color: Color) SDL.C.SDL_Color {
     };
 }
 
-const SDL = @import("root");
+const SDL = @import("root.zig");

@@ -43,4 +43,4 @@ pub fn From_C(e: SDL.C.SDL_Event) Keyboard {
     };
 }
 
-const SDL = @import("root");
+const SDL = @import("root.zig");

@@ -77,4 +77,4 @@ pub const Mouse_Button = @import("Event/Mouse_Button.zig");
 pub const Mouse_Wheel = @import("Event/Mouse_Wheel.zig");
 pub const Quit = @import("Event/Quit.zig");
 
-const SDL = @import("root");
+const SDL = @import("root.zig");

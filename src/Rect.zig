@@ -34,4 +34,4 @@ pub fn Rect(comptime kind: Kind) type {
     };
 }
 
-const SDL = @import("root");
+const SDL = @import("root.zig");

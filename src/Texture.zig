@@ -19,4 +19,4 @@ pub fn Destroy(self: Texture) void {
     SDL.C.SDL_DestroyTexture(self.handle);
 }
 
-const SDL = @import("root");
+const SDL = @import("root.zig");

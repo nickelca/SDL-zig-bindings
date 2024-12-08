@@ -64,5 +64,5 @@ pub const Create_Flags = packed struct(u32) {
     __pad2: u2 = 0,
 };
 
-const SDL = @import("root");
+const SDL = @import("root.zig");
 const std = @import("std");

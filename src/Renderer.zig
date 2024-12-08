@@ -141,5 +141,5 @@ pub fn Copy_Texture(
     }
 }
 
-const SDL = @import("root");
+const SDL = @import("root.zig");
 const std = @import("std");
