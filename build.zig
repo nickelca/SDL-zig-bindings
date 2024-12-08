@@ -22,6 +22,18 @@ pub fn build(b: *std.Build) void {
     sdl.addLibraryPath(libsdl_lib_path);
     sdl.linkSystemLibrary("SDL2", .{});
     sdl.addImport("C", c.createModule());
+
+    const example = b.addExecutable(.{
+        .name = "example",
+        .root_source_file = b.path("example.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
+    example.root_module.addImport("SDL", sdl);
+
+    const example_run = b.addRunArtifact(example);
+    const example_step = b.step("example", "Run an example using SDL");
+    example_step.dependOn(&example_run.step);
 }
 
 const std = @import("std");
