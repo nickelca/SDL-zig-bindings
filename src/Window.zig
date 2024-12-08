@@ -1,10 +1,10 @@
 pub const Window = @This();
 
-handle: *SDL.c.SDL_Window,
+handle: *SDL.C.SDL_Window,
 
 const Coordinate = enum(i32) {
-    pub const centered: Coordinate = .From_I32(SDL.c.SDL_WINDOWPOS_CENTERED);
-    pub const @"undefined": Coordinate = .From_I32(SDL.c.SDL_WINDOWPOS_UNDEFINED);
+    pub const centered: Coordinate = .From_I32(SDL.C.SDL_WINDOWPOS_CENTERED);
+    pub const @"undefined": Coordinate = .From_I32(SDL.C.SDL_WINDOWPOS_UNDEFINED);
     _,
 
     pub fn From_I32(v: i32) Coordinate {
@@ -13,7 +13,7 @@ const Coordinate = enum(i32) {
 };
 
 pub fn Create(title: [:0]const u8, x: Coordinate, y: Coordinate, w: i32, h: i32, flags: CreateFlags) !Window {
-    const handle = SDL.c.SDL_CreateWindow(
+    const handle = SDL.C.SDL_CreateWindow(
         title.ptr,
         @intFromEnum(x),
         @intFromEnum(y),
@@ -30,7 +30,7 @@ pub fn Create(title: [:0]const u8, x: Coordinate, y: Coordinate, w: i32, h: i32,
 }
 
 pub fn Destroy(self: Window) void {
-    SDL.c.SDL_DestroyWindow(self.handle);
+    SDL.C.SDL_DestroyWindow(self.handle);
 }
 
 pub const CreateFlags = packed struct(u32) {
@@ -64,5 +64,5 @@ pub const CreateFlags = packed struct(u32) {
     __pad2: u2 = 0,
 };
 
-const SDL = @import("../SDL.zig");
+const SDL = @import("root");
 const std = @import("std");

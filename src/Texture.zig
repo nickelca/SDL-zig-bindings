@@ -1,9 +1,9 @@
 const Texture = @This();
 
-handle: *SDL.c.SDL_Texture,
+handle: *SDL.C.SDL_Texture,
 
 pub fn From_Surface(renderer: SDL.Renderer, surface: SDL.Surface) !Texture {
-    const texture: *SDL.c.SDL_Texture = SDL.c.SDL_CreateTextureFromSurface(
+    const texture: *SDL.C.SDL_Texture = SDL.c.SDL_CreateTextureFromSurface(
         renderer.handle,
         surface.handle,
     ) orelse {
@@ -16,7 +16,7 @@ pub fn From_Surface(renderer: SDL.Renderer, surface: SDL.Surface) !Texture {
 }
 
 pub fn Destroy(self: Texture) void {
-    SDL.c.SDL_DestroyTexture(self.handle);
+    SDL.C.SDL_DestroyTexture(self.handle);
 }
 
-const SDL = @import("../SDL.zig");
+const SDL = @import("root");

@@ -19,10 +19,10 @@ x: i32,
 y: i32,
 
 /// Expects .mouse_button_down or .mouse_button_up to be active
-pub fn To_C(e: SDL.Event) SDL.c.SDL_MouseButtonEvent {
+pub fn To_C(e: SDL.Event) SDL.C.SDL_MouseButtonEvent {
     const tag = switch (e) {
-        .mouse_button_down => SDL.c.SDL_MOUSEBUTTONDOWN,
-        .mouse_button_up => SDL.c.SDL_MOUSEBUTTONUP,
+        .mouse_button_down => SDL.C.SDL_MOUSEBUTTONDOWN,
+        .mouse_button_up => SDL.C.SDL_MOUSEBUTTONUP,
         else => unreachable,
     };
     return switch (e) {
@@ -42,7 +42,7 @@ pub fn To_C(e: SDL.Event) SDL.c.SDL_MouseButtonEvent {
     };
 }
 
-pub fn From_C(e: SDL.c.SDL_Event) Mouse_Button {
+pub fn From_C(e: SDL.C.SDL_Event) Mouse_Button {
     return .{
         .time_stamp = e.button.timestamp,
         .window_id = e.button.windowID,
@@ -55,4 +55,4 @@ pub fn From_C(e: SDL.c.SDL_Event) Mouse_Button {
     };
 }
 
-const SDL = @import("../../SDL.zig");
+const SDL = @import("root");

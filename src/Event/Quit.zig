@@ -4,9 +4,9 @@ const Quit = @This();
 time_stamp: u32,
 
 /// Expects .quit to be active
-pub fn To_C(e: SDL.Event) SDL.c.SDL_QuitEvent {
+pub fn To_C(e: SDL.Event) SDL.C.SDL_QuitEvent {
     const tag: u32 = switch (e) {
-        .quit => SDL.c.SDL_QUIT,
+        .quit => SDL.C.SDL_QUIT,
         else => unreachable,
     };
     return switch (e) {
@@ -19,10 +19,10 @@ pub fn To_C(e: SDL.Event) SDL.c.SDL_QuitEvent {
 }
 
 /// Expects ::SDL_QUIT to be active
-pub fn From_C(e: SDL.c.SDL_Event) Quit {
+pub fn From_C(e: SDL.C.SDL_Event) Quit {
     return .{
         .time_stamp = e.quit.timestamp,
     };
 }
 
-const SDL = @import("../../SDL.zig");
+const SDL = @import("root");

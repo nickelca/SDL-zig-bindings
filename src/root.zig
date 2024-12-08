@@ -1,16 +1,16 @@
 pub fn Init(flags: InitFlags) !void {
-    if (c.SDL_Init(@bitCast(flags)) < 0) {
+    if (C.SDL_Init(@bitCast(flags)) < 0) {
         Log_Error("Init");
         return error.SDL_Init;
     }
 }
 
 pub fn Deinit() void {
-    c.SDL_Quit();
+    C.SDL_Quit();
 }
 
 pub fn Get_Error() ?[*:0]const u8 {
-    return c.SDL_GetError();
+    return C.SDL_GetError();
 }
 
 pub fn Version_At_Least(major: i32, minor: i32, patch: u32) bool {
@@ -20,8 +20,8 @@ pub fn Version_At_Least(major: i32, minor: i32, patch: u32) bool {
 }
 
 pub fn Wait_Event() !Event {
-    var e: c.SDL_Event = undefined;
-    if (c.SDL_WaitEvent(&e) != 1) {
+    var e: C.SDL_Event = undefined;
+    if (C.SDL_WaitEvent(&e) != 1) {
         Log_Error("Wait_Event");
         return error.SDL_Wait_Error;
     }
@@ -29,8 +29,8 @@ pub fn Wait_Event() !Event {
 }
 
 pub fn Poll_Event() ?Event {
-    var e: c.SDL_Event = undefined;
-    if (c.SDL_PollEvent(&e) == 0) {
+    var e: C.SDL_Event = undefined;
+    if (C.SDL_PollEvent(&e) == 0) {
         return null;
     }
     return Event.From_C(e);
@@ -54,7 +54,7 @@ pub const InitFlags = packed struct(u32) {
 };
 
 pub fn Set_Hint(hint: Hint, value: [:0]const u8) !void {
-    const ret = c.SDL_SetHint(hint.Get_Str(), value);
+    const ret = C.SDL_SetHint(hint.Get_Str(), value);
     if (ret == 0) {
         Log_Error("Set_Hint");
         return error.SDL_Set_Hint;
@@ -79,7 +79,7 @@ pub const Mouse_State = struct {
             .x = 0,
             .y = 0,
         };
-        const mask: u32 = c.SDL_GetMouseState(&res.x, &res.y);
+        const mask: u32 = C.SDL_GetMouseState(&res.x, &res.y);
         res.pressed = @bitCast(mask);
         return res;
     }
@@ -93,9 +93,9 @@ pub fn Log_Error(function_name: []const u8) void {
     , .{ function_name, Get_Error() });
 }
 
-pub const major_version = c.SDL_MAJOR_VERSION;
-pub const minor_version = c.SDL_MINOR_VERSION;
-pub const patch_level = c.SDL_PATCHLEVEL;
+pub const major_version = C.SDL_MAJOR_VERSION;
+pub const minor_version = C.SDL_MINOR_VERSION;
+pub const patch_level = C.SDL_PATCHLEVEL;
 
 pub const Window = @import("SDL/Window.zig");
 pub const Renderer = @import("SDL/Renderer.zig");
@@ -106,5 +106,5 @@ pub const Surface = @import("SDL/Surface.zig");
 pub const Texture = @import("SDL/Texture.zig");
 pub const Hint = @import("SDL/Hint.zig").Hint;
 
-pub const c = @import("sdlc");
+pub const C = @import("C");
 const std = @import("std");

@@ -1,6 +1,6 @@
 ///! Todo: more events
 pub const Event = union(enum) {
-    untranslated: SDL.c.SDL_Event,
+    untranslated: SDL.C.SDL_Event,
 
     /// User-requested quit
     quit: Quit,
@@ -46,7 +46,7 @@ pub const Event = union(enum) {
         };
     }
 
-    pub fn To_C(e: Event) SDL.c.SDL_Event {
+    pub fn To_C(e: Event) SDL.C.SDL_Event {
         return switch (e) {
             .quit => .{ .quit = Quit.To_C(e) },
             .key_down, .key_up => .{ .key = Keyboard.To_C(e) },
@@ -57,15 +57,15 @@ pub const Event = union(enum) {
         };
     }
 
-    pub fn From_C(e: SDL.c.SDL_Event) Event {
+    pub fn From_C(e: SDL.C.SDL_Event) Event {
         return switch (e.type) {
-            SDL.c.SDL_QUIT => .{ .quit = Quit.From_C(e) },
-            SDL.c.SDL_KEYDOWN => .{ .key_down = Keyboard.From_C(e) },
-            SDL.c.SDL_KEYUP => .{ .key_up = Keyboard.From_C(e) },
-            SDL.c.SDL_MOUSEMOTION => .{ .mouse_motion = Mouse_Motion.From_C(e) },
-            SDL.c.SDL_MOUSEBUTTONDOWN => .{ .mouse_button_down = Mouse_Button.From_C(e) },
-            SDL.c.SDL_MOUSEBUTTONUP => .{ .mouse_button_up = Mouse_Button.From_C(e) },
-            SDL.c.SDL_MOUSEWHEEL => .{ .mouse_wheel = Mouse_Wheel.From_C(e) },
+            SDL.C.SDL_QUIT => .{ .quit = Quit.From_C(e) },
+            SDL.C.SDL_KEYDOWN => .{ .key_down = Keyboard.From_C(e) },
+            SDL.C.SDL_KEYUP => .{ .key_up = Keyboard.From_C(e) },
+            SDL.C.SDL_MOUSEMOTION => .{ .mouse_motion = Mouse_Motion.From_C(e) },
+            SDL.C.SDL_MOUSEBUTTONDOWN => .{ .mouse_button_down = Mouse_Button.From_C(e) },
+            SDL.C.SDL_MOUSEBUTTONUP => .{ .mouse_button_up = Mouse_Button.From_C(e) },
+            SDL.C.SDL_MOUSEWHEEL => .{ .mouse_wheel = Mouse_Wheel.From_C(e) },
             else => .{ .untranslated = e },
         };
     }
@@ -77,4 +77,4 @@ pub const Mouse_Button = @import("Event/Mouse_Button.zig");
 pub const Mouse_Wheel = @import("Event/Mouse_Wheel.zig");
 pub const Quit = @import("Event/Quit.zig");
 
-const SDL = @import("../SDL.zig");
+const SDL = @import("root");

@@ -26,9 +26,9 @@ mouse_x: i32,
 mouse_y: i32,
 
 /// Expects .mouse_button_down or .mouse_button_up to be active
-pub fn To_C(e: SDL.Event) SDL.c.SDL_MouseWheelEvent {
+pub fn To_C(e: SDL.Event) SDL.C.SDL_MouseWheelEvent {
     const tag: u32 = switch (e) {
-        .mouse_wheel => SDL.c.SDL_MOUSEWHEEL,
+        .mouse_wheel => SDL.C.SDL_MOUSEWHEEL,
         else => unreachable,
     };
     return switch (e) {
@@ -50,7 +50,7 @@ pub fn To_C(e: SDL.Event) SDL.c.SDL_MouseWheelEvent {
 }
 
 /// Expects ::SDL_MOUSEWHEEL to be active
-pub fn From_C(e: SDL.c.SDL_Event) Mouse_Wheel {
+pub fn From_C(e: SDL.C.SDL_Event) Mouse_Wheel {
     return .{
         .time_stamp = e.wheel.timestamp,
         .window_id = e.wheel.windowID,
@@ -65,4 +65,4 @@ pub fn From_C(e: SDL.c.SDL_Event) Mouse_Wheel {
     };
 }
 
-const SDL = @import("../../SDL.zig");
+const SDL = @import("root");

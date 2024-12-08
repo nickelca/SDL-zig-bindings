@@ -9,13 +9,13 @@ state: u8,
 /// Is this a key repeat?
 repeat: bool,
 /// The key that was pressed or released
-keysym: SDL.c.SDL_Keysym,
+keysym: SDL.C.SDL_Keysym,
 
 /// Expects .key_down or .key_up to be active
-pub fn To_C(e: SDL.Event) SDL.c.SDL_KeyboardEvent {
+pub fn To_C(e: SDL.Event) SDL.C.SDL_KeyboardEvent {
     const tag = switch (e) {
-        .key_down => SDL.c.SDL_KEYDOWN,
-        .key_up => SDL.c.SDL_KEYUP,
+        .key_down => SDL.C.SDL_KEYDOWN,
+        .key_up => SDL.C.SDL_KEYUP,
         else => unreachable,
     };
     return switch (e) {
@@ -33,7 +33,7 @@ pub fn To_C(e: SDL.Event) SDL.c.SDL_KeyboardEvent {
     };
 }
 
-pub fn From_C(e: SDL.c.SDL_Event) Keyboard {
+pub fn From_C(e: SDL.C.SDL_Event) Keyboard {
     return .{
         .time_stamp = e.key.timestamp,
         .window_id = e.key.windowID,
@@ -43,4 +43,4 @@ pub fn From_C(e: SDL.c.SDL_Event) Keyboard {
     };
 }
 
-const SDL = @import("../../SDL.zig");
+const SDL = @import("root");

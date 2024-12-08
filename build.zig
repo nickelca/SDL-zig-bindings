@@ -14,7 +14,7 @@ pub fn build(b: *std.Build) void {
     c.addIncludePath(libsdl_include_path);
 
     const sdl = b.addModule("SDL", .{
-        .root_source_file = b.path("src/SDL.zig"),
+        .root_source_file = b.path("src/root.zig"),
         .link_libc = true,
         .target = target,
         .optimize = optimize,

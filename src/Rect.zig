@@ -14,8 +14,8 @@ pub fn Rect(comptime kind: Kind) type {
     return struct {
         const Self = @This();
         const C_Self = switch (kind) {
-            .i32 => SDL.c.SDL_Rect,
-            .f32 => SDL.c.SDL_FRect,
+            .i32 => SDL.C.SDL_Rect,
+            .f32 => SDL.C.SDL_FRect,
         };
 
         x: T,
@@ -34,4 +34,4 @@ pub fn Rect(comptime kind: Kind) type {
     };
 }
 
-const SDL = @import("../SDL.zig");
+const SDL = @import("root");

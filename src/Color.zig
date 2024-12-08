@@ -23,7 +23,7 @@ pub fn From_RGB(r: u8, g: u8, b: u8, a: u8) Color {
     };
 }
 
-pub fn To_C(color: Color) SDL.c.SDL_Color {
+pub fn To_C(color: Color) SDL.C.SDL_Color {
     return .{
         .r = color.r,
         .g = color.g,
@@ -32,4 +32,4 @@ pub fn To_C(color: Color) SDL.c.SDL_Color {
     };
 }
 
-const SDL = @import("../SDL.zig");
+const SDL = @import("root");

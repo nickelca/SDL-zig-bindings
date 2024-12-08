@@ -10,7 +10,7 @@ event: u8,
 data1: i32,
 data2: i32,
 
-pub fn From_C(e: SDL.c.SDL_WindowEvent) SDL.Event {
+pub fn From_C(e: SDL.C.SDL_WindowEvent) SDL.Event {
     return .{ .window = .{
         .time_stamp = e.timestamp,
         .display_index = e.display,
@@ -20,7 +20,7 @@ pub fn From_C(e: SDL.c.SDL_WindowEvent) SDL.Event {
 }
 
 /// Expects .window to be active
-pub fn To_C(e: SDL.Event) SDL.c.SDL_WindowEvent {
+pub fn To_C(e: SDL.Event) SDL.C.SDL_WindowEvent {
     return switch (e) {
         .window => |payload| .{
             .type = 0x150,
@@ -36,4 +36,4 @@ pub fn To_C(e: SDL.Event) SDL.c.SDL_WindowEvent {
     };
 }
 
-const SDL = @import("../../SDL.zig");
+const SDL = @import("root");
