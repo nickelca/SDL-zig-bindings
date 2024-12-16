@@ -21,10 +21,12 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-    c.defineCMacro(
-        "SDL_TTF_ENABLED",
-        if (enable_ttf) "1" else "0",
-    );
+    if (enable_ttf) {
+        c.defineCMacro("SDL_TTF_ENABLED", "1");
+        sdl.linkSystemLibrary("SDL2_ttf", .{});
+    } else {
+        c.defineCMacro("SDL_TTF_ENABLED", "0");
+    }
 
     sdl.addImport("C", c.createModule());
 
