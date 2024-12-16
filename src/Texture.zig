@@ -3,7 +3,7 @@ const Texture = @This();
 handle: *SDL.C.SDL_Texture,
 
 pub fn From_Surface(renderer: SDL.Renderer, surface: SDL.Surface) !Texture {
-    const texture: *SDL.C.SDL_Texture = SDL.c.SDL_CreateTextureFromSurface(
+    const texture: *SDL.C.SDL_Texture = SDL.C.SDL_CreateTextureFromSurface(
         renderer.handle,
         surface.handle,
     ) orelse {
