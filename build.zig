@@ -2,6 +2,8 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+    const enable_ttf = b.user_input_options.get("ttf") orelse false;
+
     const libsdl_dep = b.dependency("libsdl", .{});
     const libsdl = libsdl_dep.artifact("SDL2");
 
@@ -19,6 +21,11 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+    c.defineCMacro(
+        "SDL_TTF_ENABLED",
+        if (enable_ttf) "1" else "0",
+    );
+
     sdl.addImport("C", c.createModule());
 
     const example = b.addExecutable(.{

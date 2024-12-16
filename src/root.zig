@@ -106,5 +106,7 @@ pub const Surface = @import("Surface.zig");
 pub const Texture = @import("Texture.zig");
 pub const Hint = @import("Hint.zig").Hint;
 
+pub const TTF = if (C.SDL_TTF_ENABLED == 1) @import("TTF.zig") else noreturn;
+
 pub const C = @import("C");
 const std = @import("std");
