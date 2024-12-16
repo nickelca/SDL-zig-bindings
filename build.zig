@@ -2,7 +2,7 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const enable_ttf = b.user_input_options.get("ttf") orelse false;
+    const enable_ttf = b.option(bool, "ttf", "Enable SDL_ttf") orelse false;
 
     const libsdl_dep = b.dependency("libsdl", .{});
     const libsdl = libsdl_dep.artifact("SDL2");
